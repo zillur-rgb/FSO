@@ -12,6 +12,7 @@ function App() {
 
   return (
     <>
+      <h1>Provide Feedback</h1>
       <div
         style={{
           display: 'grid',
@@ -59,11 +60,16 @@ function App() {
         <FeedbackCount total={state.neutral} type="Neutral" />
         <FeedbackCount total={state.bad} type="Bad" />
       </div>
-      <FeedbackCalculations
-        good={state.good}
-        neutral={state.neutral}
-        bad={state.bad}
-      />
+      <h1>Statisctics</h1>
+      {state.bad > 0 || state.good > 0 || state.neutral > 0 ? (
+        <FeedbackCalculations
+          good={state.good}
+          neutral={state.neutral}
+          bad={state.bad}
+        />
+      ) : (
+        <p>No feedback given</p>
+      )}
     </>
   );
 }
