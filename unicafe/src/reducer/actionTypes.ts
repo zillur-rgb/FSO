@@ -6,5 +6,5 @@ export enum FeedbackKind {
 
 export type FeedbackType = {
   type: FeedbackKind;
-  payload: any;
+  payload?: any;
 };
