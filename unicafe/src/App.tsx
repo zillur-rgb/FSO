@@ -1,4 +1,5 @@
 import { useReducer } from 'react';
+import FeedbackCalculations from './components/FeedbackCalculations';
 import FeedbackCount from './components/FeedbackCount';
 import { FeedbackKind } from './reducer/actionTypes';
 import { feedbackDispatch } from './reducer/feedbackDispatch';
@@ -58,6 +59,11 @@ function App() {
         <FeedbackCount total={state.neutral} type="Neutral" />
         <FeedbackCount total={state.bad} type="Bad" />
       </div>
+      <FeedbackCalculations
+        good={state.good}
+        neutral={state.neutral}
+        bad={state.bad}
+      />
     </>
   );
 }
