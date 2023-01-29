@@ -7,7 +7,7 @@ const App = () => {
 
   return (
     <>
-      <Header course={course} />
+      <Header />
       <Content />
       <Total />
     </>

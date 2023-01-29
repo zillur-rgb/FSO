@@ -1,10 +1,15 @@
-export interface Content {
+export interface Courses {
   id: string;
   part: string;
   exercise: number;
 }
+export interface Contents {
+  id: string;
+  header: string;
+  courses: Courses[];
+}
 
-export const courses: Content[] = [
+export const courses: Courses[] = [
   {
     id: '0',
     part: 'Fundamentals of React.',
@@ -21,3 +26,9 @@ export const courses: Content[] = [
     exercise: 14,
   },
 ];
+
+export const contents: Contents = {
+  id: '0',
+  header: 'Half Stack application development',
+  courses,
+};
