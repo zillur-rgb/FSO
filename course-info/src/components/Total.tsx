@@ -1,8 +1,8 @@
 import { courses } from '../data/contentsData';
 
-const Total = () => {
-  const totalEx = courses.reduce((total, course) => {
-    return (total = total + course.exercise);
+const Total = ({ data }: any) => {
+  const totalEx = data.reduce((total: any, course: { exercises: any }) => {
+    return (total = total + course.exercises);
   }, 0);
   return (
     <p

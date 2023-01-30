@@ -1,13 +1,17 @@
 import { courses } from '../data/contentsData';
+import Total from './Total';
 
-const Content = () => {
+const Content = ({ data }: any) => {
+  console.log('Data', data);
+
   return (
     <>
-      {courses.map((course) => (
+      {data.map((course: any) => (
         <p key={course.id}>
-          {course.part} {course.exercise}
+          {course.name} {course.exercises}
         </p>
       ))}
+      <Total data={data} />
     </>
   );
 };
