@@ -40,13 +40,43 @@ app.get('/api/info', (req, res) => {
   res.send(info);
 });
 
-/** Showing single phonebook info */
+/** Showing single phonebook info
+ * @param id
+ * @returns singlePerson
+ *
+ */
 app.get('/api/persons/:id', (req, res) => {
   const id = Number(req.params.id);
   const singlePerson = persons.find((p) => p.id === id);
   singlePerson ? res.json(singlePerson) : res.status(404);
 });
 
+/** Making post request */
+
+const generateId = () => {
+  const maxId = persons.length > 0 ? Math.max(...persons.map((p) => p.id)) : 0;
+
+  return maxId + 1;
+};
+
+app.post('/api/persons', (req, res) => {
+  const body = req.body;
+
+  if (!body) {
+    return res.status(400).json({
+      error: 'content missing',
+    });
+  }
+
+  const person = {
+    id: generateId(),
+    name: body.name,
+    number: body.number,
+  };
+
+  const persons = persons.concat(person);
+  res.json(persons);
+});
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
