@@ -1,5 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
+const Blog = require('./models/blogs');
 
 let persons = [
   {
@@ -28,11 +30,12 @@ app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>');
 });
 
-app.get('/api/persons', (request, response) => {
-  response.json(persons);
+app.get('/api/blogs', (request, response) => {
+  const blogs = Blog.find({}).then((res) => res.json());
+  response.json(blogs);
 });
 
-/** Shpwing info */
+/** Showing info */
 app.get('/api/info', (req, res) => {
   const info = `<p>Phonebook has ${
     persons.length
