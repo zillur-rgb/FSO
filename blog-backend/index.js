@@ -32,7 +32,15 @@ app.get('/api/persons', (request, response) => {
   response.json(persons);
 });
 
-const PORT = 3001;
+/** Shpwing info */
+app.get('/api/info', (req, res) => {
+  const info = `<p>Phonebook has ${
+    persons.length
+  } entry <br> ${new Date()}</p>`;
+  res.send(info);
+});
+
+const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
