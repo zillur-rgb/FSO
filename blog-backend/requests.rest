@@ -1,0 +1,20 @@
+GET http://localhost:5000/api/blogs
+
+###
+GET http://localhost:5000/api/blogs/1
+
+###
+
+POST http://localhost:5000/api/blogs
+Content-Type: application/json
+
+{
+    "title": "Will JavaScript be relevant in 2023?",
+    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+    "category": [
+"Programming",
+"Web Development",
+"Technology"
+],
+    "desc": "JavaScript has been around for nearly 25 years and it has been one of the most popular programming languages during that time. There is no doubt that JavaScript has been a major force in the development of the modern web. However, there is no guarantee that JavaScript will still be relevant in 2023.'\n' '\n'The rise of alternative programming languages, such as TypeScript and Dart, could potentially eat into the market share of JavaScript. '\n' '\n' In addition, newer web technologies, such as WebAssembly, could also provide a more efficient way of developing web applications. '\n' '\n'Only time will tell whether JavaScript will still be relevant in 2023. However, there is a strong possibility that the language will continue to be popular among developers.🔮"
+}

@@ -1,6 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const app = express();
+app.use(express.json());
+
 const Blog = require('./models/blogs');
 
 let persons = [
@@ -30,31 +32,44 @@ app.get('/', (request, response) => {
   response.send('<h1>Hello World!</h1>');
 });
 
-app.get('/api/blogs', (request, response) => {
-  const blogs = Blog.find({}).then((res) => res.json());
-  response.json(blogs);
-});
-
-/** Showing info */
-app.get('/api/info', (req, res) => {
-  const info = `<p>Phonebook has ${
-    persons.length
-  } entry <br> ${new Date()}</p>`;
-  res.send(info);
-});
-
-/** Showing single phonebook info
- * @param id
- * @returns singlePerson
- *
+/**
+ * Getting all the notes
  */
-app.get('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id);
-  const singlePerson = persons.find((p) => p.id === id);
-  singlePerson ? res.json(singlePerson) : res.status(404);
+app.get('/api/blogs', (request, response) => {
+  Blog.find({}).then((blogs) => {
+    response.json(blogs);
+  });
 });
 
-/** Making post request */
+/**
+ * Posting new note
+ */
+app.post('/api/blogs', (req, res) => {
+  const body = req.body;
+  // console.log('BODY', body);
+
+  const blog = new Blog({
+    title: body.title,
+    image: body.image,
+    category: body.category,
+    desc: body.desc,
+    createdAt: new Date(),
+  });
+
+  blog.save().then((savedBlog) => {
+    res.json(savedBlog);
+  });
+});
+
+/** Showing single blog
+ * @param id
+ * @returns singleNlog
+ */
+app.get('/api/blogs/:id', (request, response) => {
+  Blog.findById(request.params.id).then((blog) => {
+    response.json(blog);
+  });
+});
 
 const generateId = () => {
   const maxId = persons.length > 0 ? Math.max(...persons.map((p) => p.id)) : 0;

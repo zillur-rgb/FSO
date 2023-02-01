@@ -12,9 +12,9 @@ mongoose
 const blogSchema = new mongoose.Schema({
   title: String,
   image: String,
-  desc: String,
   category: [String],
-  date: Date,
+  desc: String,
+  createdAt: Date,
 });
 blogSchema.set('toJSON', {
   transform: (document, returnedObject) => {
