@@ -9,12 +9,26 @@ POST http://localhost:5000/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Will JavaScript be relevant in 2023?",
-    "image": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-    "category": [
+    "title": "Will AI Machine learning replace programmers?",
+    "image": "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80",
+    "category":  [
+"Artificial Intelligence",
 "Programming",
-"Web Development",
-"Technology"
+"Machine Learning"
 ],
-    "desc": "JavaScript has been around for nearly 25 years and it has been one of the most popular programming languages during that time. There is no doubt that JavaScript has been a major force in the development of the modern web. However, there is no guarantee that JavaScript will still be relevant in 2023.'\n' '\n'The rise of alternative programming languages, such as TypeScript and Dart, could potentially eat into the market share of JavaScript. '\n' '\n' In addition, newer web technologies, such as WebAssembly, could also provide a more efficient way of developing web applications. '\n' '\n'Only time will tell whether JavaScript will still be relevant in 2023. However, there is a strong possibility that the language will continue to be popular among developers.🔮"
+    "desc": "Will AI replace computer programmers in the near future? Will it be possible to completely replace the programmer? Probably only if we can create the so-called strong artificial intelligence (artificial general intelligence) – that is, one that fulfills the assumption that certain forms of artificial intelligence have all the properties available to the human mind.'\n' '\n'The answer is very simple: AI will augment the workforce and “computer programmers” will become “AI programmers”.'\n' '\n'Nobody doubts that AI is getting much better at programming every day. And it is a fact that AI-driven tools will ultimately be much better than people in programming. But machines won’t become independent of humans that quickly, and being able to create useful and practical code that spans more than a few lines is something that requires a level of intelligence that comes close to the famous singularity.'\n' '\n'The fact also seems that the work of software developers will change fundamentally. Neural networks or artificial intelligence will help improve digital work, but they will hardly replace developers in the foreseeable future."
 }
+
+###
+
+POST http://localhost:5000/api/phonebooks
+Content-Type: application/json
+
+{
+    "name": "Mary Poppendieck",
+    "number": "39-23-6423122"
+}
+
+###
+
+GET http://localhost:5000/api/phonebooks

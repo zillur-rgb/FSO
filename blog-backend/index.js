@@ -4,6 +4,7 @@ const app = express();
 app.use(express.json());
 
 const Blog = require('./models/blogs');
+const Phonebook = require('./models/phonebooks');
 
 let persons = [
   {
@@ -33,7 +34,45 @@ app.get('/', (request, response) => {
 });
 
 /**
- * Getting all the notes
+ * Posting phonebook data to backend
+ */
+app.post('/api/phonebooks', (req, res) => {
+  const body = req.body;
+
+  console.log('body', body);
+
+  const phonebook = new Phonebook({
+    name: body.name,
+    number: body.number,
+  });
+
+  phonebook.save().then((savedNote) => {
+    res.json(savedNote);
+  });
+});
+
+/**
+ * Getting all the phonebook info
+ */
+app.get('/api/phonebooks', (req, res) => {
+  Phonebook.find({}).then((phonebooks) => {
+    res.json(phonebooks);
+  });
+});
+
+/**
+ * Getting single blog
+ * @param id
+ * @returns
+ */
+app.get('/api/phonebooks/:id', (request, response) => {
+  Phonebook.findById(request.params.id).then((contact) => {
+    response.json(contact);
+  });
+});
+
+/**
+ * Getting all the blogs
  */
 app.get('/api/blogs', (request, response) => {
   Blog.find({}).then((blogs) => {
