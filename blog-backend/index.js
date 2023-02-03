@@ -46,18 +46,23 @@ app.post('/api/phonebooks', (req, res) => {
     number: body.number,
   });
 
-  phonebook.save().then((savedNote) => {
-    res.json(savedNote);
-  });
+  phonebook
+    .save()
+    .then((savedNote) => {
+      res.json(savedNote);
+    })
+    .catch((err) => next(err));
 });
 
 /**
  * Getting all the phonebook info
  */
 app.get('/api/phonebooks', (req, res) => {
-  Phonebook.find({}).then((phonebooks) => {
-    res.json(phonebooks);
-  });
+  Phonebook.find({})
+    .then((phonebooks) => {
+      res.json(phonebooks);
+    })
+    .catch((err) => next(err));
 });
 
 /**
@@ -65,24 +70,28 @@ app.get('/api/phonebooks', (req, res) => {
  * @param id
  * @returns
  */
-app.get('/api/phonebooks/:id', (request, response) => {
+app.get('/api/phonebooks/:id', (request, response, next) => {
   Phonebook.findById(request.params.id)
     .then((contact) => {
       response.json(contact);
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      console.log(err.message);
+      next(err);
+    });
 });
 
 /**
  * Deleting single data
  */
-app.delete('/api/phonebooks/:id', (req, res) => {
+app.delete('/api/phonebooks/:id', (req, res, next) => {
   Phonebook.findByIdAndRemove(req.params.id)
     .then((result) => {
       res.status(204).end();
     })
     .catch((err) => {
       console.log(err.message);
+      next(err);
     });
 });
 
@@ -119,10 +128,12 @@ app.post('/api/blogs', (req, res) => {
  * @param id
  * @returns singleNlog
  */
-app.get('/api/blogs/:id', (request, response) => {
-  Blog.findById(request.params.id).then((blog) => {
-    response.json(blog);
-  });
+app.get('/api/blogs/:id', (request, response, next) => {
+  Blog.findById(request.params.id)
+    .then((blog) => {
+      response.json(blog);
+    })
+    .catch((err) => next(err));
 });
 
 const generateId = () => {
@@ -149,6 +160,33 @@ app.post('/api/persons', (req, res) => {
   const persons = persons.concat(person);
   res.json(persons);
 });
+
+const unknownEndpoint = (req, res) => {
+  res.status(404).send({ error: 'Unknown endpoint' });
+};
+
+app.use(unknownEndpoint);
+
+/**
+ * Error handler middleware
+ * @param {*} error
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns
+ */
+const errorHandler = (error, req, res, next) => {
+  console.log(error.message);
+
+  if (error.message === 'CastError') {
+    return res.status(400).send('Malformatted id');
+  }
+
+  next(error);
+};
+
+// This must be the last middleware
+app.use(errorHandler);
 
 const PORT = 5000;
 app.listen(PORT, () => {
