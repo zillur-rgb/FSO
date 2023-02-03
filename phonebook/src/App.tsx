@@ -10,9 +10,11 @@ const App = () => {
     const addName = {
       name: newName,
     };
-
+    const alreadyAdded = persons.find((person) => person.name === addName.name);
+    alreadyAdded
+      ? alert(`${addName.name} is already added`)
+      : setPersons(persons.concat(addName));
     setNewName("");
-    setPersons(persons.concat(addName));
   };
 
   console.log("newName: ", newName);
