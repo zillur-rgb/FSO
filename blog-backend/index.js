@@ -95,6 +95,19 @@ app.delete('/api/phonebooks/:id', (req, res, next) => {
     });
 });
 
+app.put('/api/phonebooks/:id', (req, res, next) => {
+  const note = {
+    name: req.body.name,
+    number: req.body.number,
+  };
+
+  Phonebook.findByIdAndUpdate(req.params.id, note, { new: true })
+    .then((updatedContact) => {
+      res.json(updatedContact);
+    })
+    .catch((err) => next(err));
+});
+
 /**
  * Getting all the blogs
  */
