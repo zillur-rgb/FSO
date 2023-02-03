@@ -25,10 +25,13 @@ POST http://localhost:5000/api/phonebooks
 Content-Type: application/json
 
 {
-    "name": "Mary Poppendieck",
-    "number": "39-23-6423122"
+    "name": "Daisy Daisy",
+    "number": "8324-56-7890"
 }
 
 ###
 
 GET http://localhost:5000/api/phonebooks
+
+###
+DELETE http://localhost:5000/api/phonebooks/63dcb7210573f8dc66407f74

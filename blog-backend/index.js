@@ -61,14 +61,29 @@ app.get('/api/phonebooks', (req, res) => {
 });
 
 /**
- * Getting single blog
+ * Getting single contact
  * @param id
  * @returns
  */
 app.get('/api/phonebooks/:id', (request, response) => {
-  Phonebook.findById(request.params.id).then((contact) => {
-    response.json(contact);
-  });
+  Phonebook.findById(request.params.id)
+    .then((contact) => {
+      response.json(contact);
+    })
+    .catch((err) => console.log(err));
+});
+
+/**
+ * Deleting single data
+ */
+app.delete('/api/phonebooks/:id', (req, res) => {
+  Phonebook.findByIdAndRemove(req.params.id)
+    .then((result) => {
+      res.status(204).end();
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
 });
 
 /**
@@ -81,7 +96,7 @@ app.get('/api/blogs', (request, response) => {
 });
 
 /**
- * Posting new note
+ * Posting new blog
  */
 app.post('/api/blogs', (req, res) => {
   const body = req.body;
@@ -134,6 +149,7 @@ app.post('/api/persons', (req, res) => {
   const persons = persons.concat(person);
   res.json(persons);
 });
+
 const PORT = 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
