@@ -2,8 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import PersonData from "./components/PersonData";
 import PersonForm from "./components/PersonForm";
+import { createNew, deleteData, getAll } from "../src/utils/axios";
 
 export type PhonebookType = {
+  id: string;
   name: string;
   number: string;
 }[];
@@ -16,7 +18,7 @@ const App = () => {
 
   useEffect(() => {
     console.log("Start fetching");
-    axios.get("http://localhost:5000/api/phonebooks").then((response) => {
+    getAll().then((response) => {
       console.log("Fetching done");
       setPersons(persons.concat(response.data));
       console.log("Persons: ", persons);
@@ -32,14 +34,19 @@ const App = () => {
     const alreadyAdded = persons.find((person) => person.name === addName.name);
     alreadyAdded
       ? alert(`${addName.name} is already added`)
-      : axios
-          .post("http://localhost:5000/api/phonebooks", addName)
-          .then((response) => {
-            console.log("Added: ", response.data)
-            setPersons(persons.concat(response.data));
-            setNewName("");
-            setNewNumber("");
-          });
+      : createNew(addName).then((response) => {
+          console.log("Added: ", response.data);
+          setPersons(persons.concat(response.data));
+          setNewName("");
+          setNewNumber("");
+        });
+  };
+
+  const onClickDeleteData = (id: string) => {
+    axios.delete(`http://localhost:5000/api/phonebooks/${id}`).then(() => {
+      console.log("id deleted");
+      persons.filter((person) => person.id !== id);
+    })
   };
 
   return (
@@ -53,7 +60,7 @@ const App = () => {
         setNewNumber={setNewNumber}
       />
       <h2>Numbers</h2>
-      <PersonData persons={persons} />
+      <PersonData persons={persons} onClickDeleteData={onClickDeleteData} />
       typing {newName}
     </div>
   );

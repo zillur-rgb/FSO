@@ -1,11 +1,13 @@
 import React from 'react'
 
 function PersonData(props: any) {
+  console.log("AllPerson", props.persons)
   return (
     <>
-    {props.persons.map((person: { name: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined; number: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | React.ReactFragment | React.ReactPortal | null | undefined }, idx: React.Key | null | undefined) => (
-        <p key={idx}>
-          {person.name} : {person.number}
+    {props.persons.map((person: any, idx: React.Key | null | undefined) => (
+      
+        <p key={person.id}>
+          {person.name} : {person.number} <button onClick= {()=> props.onClickDeleteData(person.id)}>delete</button>
         </p>
       ))}
     </>
