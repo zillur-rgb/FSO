@@ -1,4 +1,6 @@
 import { useState } from "react";
+import PersonData from "./components/PersonData";
+import PersonForm from "./components/PersonForm";
 
 export type PhonebookType = {
   name: string;
@@ -25,36 +27,15 @@ const App = () => {
     setNewNumber("");
   };
 
-  console.log("newName: ", newName);
 
   return (
-    <>
+    <div style={{backgroundColor: "#333", color: "#eee", height:"100vh"}}>
       <h2>Phonebook</h2>
-      <form onSubmit={onSubmit}>
-        <div>
-          Name:{" "}
-          <input value={newName} onChange={(e) => setNewName(e.target.value)} />
-        </div>
-        <div>
-          Number:{" "}
-          <input
-            type="number"
-            value={newNumber}
-            onChange={(e) => setNewNumber(e.target.value)}
-          />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm newName={newName} setNewName={setNewName} onSubmit={onSubmit} newNumber={newNumber} setNewNumber={setNewNumber} />
       <h2>Numbers</h2>
-      {persons.map((person, idx) => (
-        <p key={idx}>
-          {person.name} : {person.number}
-        </p>
-      ))}
+      <PersonData persons={persons}/>
       typing {newName}
-    </>
+    </div>
   );
 };
 
