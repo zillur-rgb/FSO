@@ -14,14 +14,14 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   console.log("Persons:", persons);
 
-  useEffect(()=>{
-    console.log("Start fetching")
-    axios.get("http://localhost:5000/api/phonebooks").then(response => {
-      console.log("Fetching done")
-      setPersons( persons.concat(response.data))
-      console.log("Persons: ", persons)
-    })
-  }, [])
+  useEffect(() => {
+    console.log("Start fetching");
+    axios.get("http://localhost:5000/api/phonebooks").then((response) => {
+      console.log("Fetching done");
+      setPersons(persons.concat(response.data));
+      console.log("Persons: ", persons);
+    });
+  }, []);
 
   const onSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -32,18 +32,28 @@ const App = () => {
     const alreadyAdded = persons.find((person) => person.name === addName.name);
     alreadyAdded
       ? alert(`${addName.name} is already added`)
-      : setPersons(persons.concat(addName));
-    setNewName("");
-    setNewNumber("");
+      : axios
+          .post("http://localhost:5000/api/phonebooks", addName)
+          .then((response) => {
+            console.log("Added: ", response.data)
+            setPersons(persons.concat(response.data));
+            setNewName("");
+            setNewNumber("");
+          });
   };
 
-
   return (
-    <div style={{backgroundColor: "#333", color: "#eee", height:"100vh"}}>
+    <div style={{ backgroundColor: "#333", color: "#eee", height: "100vh" }}>
       <h2>Phonebook</h2>
-      <PersonForm newName={newName} setNewName={setNewName} onSubmit={onSubmit} newNumber={newNumber} setNewNumber={setNewNumber} />
+      <PersonForm
+        newName={newName}
+        setNewName={setNewName}
+        onSubmit={onSubmit}
+        newNumber={newNumber}
+        setNewNumber={setNewNumber}
+      />
       <h2>Numbers</h2>
-      <PersonData persons={persons}/>
+      <PersonData persons={persons} />
       typing {newName}
     </div>
   );
