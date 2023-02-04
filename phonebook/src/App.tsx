@@ -1,4 +1,5 @@
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import PersonData from "./components/PersonData";
 import PersonForm from "./components/PersonForm";
 
@@ -12,6 +13,15 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   console.log("Persons:", persons);
+
+  useEffect(()=>{
+    console.log("Start fetching")
+    axios.get("http://localhost:5000/api/phonebooks").then(response => {
+      console.log("Fetching done")
+      setPersons( persons.concat(response.data))
+      console.log("Persons: ", persons)
+    })
+  }, [])
 
   const onSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
