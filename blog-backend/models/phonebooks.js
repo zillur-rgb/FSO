@@ -5,7 +5,7 @@ const url = process.env.MONGODB_URI;
 console.log(`Connecting to phonebook database on ${process.env.PORT}`);
 
 mongoose
-  .connect(url)
+  .connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
   .then((res) => console.log('Connected to database'))
   .catch((err) => {
     console.log('Failed connection, ', err.message);
