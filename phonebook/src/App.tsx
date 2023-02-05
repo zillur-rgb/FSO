@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import PersonData from "./components/PersonData";
 import PersonForm from "./components/PersonForm";
 import { createNew, deleteData, getAll, update } from "../src/utils/axios";
+import Notifications from "./components/Notifications";
 
 export type PhonebookType = {
   id: string;
@@ -14,7 +15,9 @@ const App = () => {
   const [persons, setPersons] = useState<PhonebookType>([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
-  // console.log("Persons:", persons);
+  const [notifications, setNotifications] = useState<string>("");
+
+  console.log("Notification: ", notifications);
 
   useEffect(() => {
     // console.log("Start fetching");
@@ -32,28 +35,44 @@ const App = () => {
       number: newNumber,
     };
     const alreadyAdded = persons.find((person) => person.name === addName.name);
-    
+
     alreadyAdded
-      ? axios.put(`http://localhost:5000/api/phonebooks/${alreadyAdded.id}`, addName).then(res => {
-        setPersons(persons.map(person => person.name !== addName.name ? person : res.data))
-        setNewName("");
-          setNewNumber("");
-      })
+      ? axios
+          .put(
+            `http://localhost:5000/api/phonebooks/${alreadyAdded.id}`,
+            addName
+          )
+          .then((res) => {
+            setPersons(
+              persons.map((person) =>
+                person.name !== addName.name ? person : res.data
+              )
+            );
+            setNewName("");
+            setNewNumber("");
+          })
       : createNew(addName).then((response) => {
           console.log("Added: ", response.data);
           setPersons(persons.concat(response.data));
+          setNotifications(`${addName.name} has been added to the list.`);
+          setTimeout(() => setNotifications(""), 5000);
           setNewName("");
           setNewNumber("");
         });
   };
 
   const onClickDeleteData = (id: string) => {
-    axios.delete(`http://localhost:5000/api/phonebooks/${id}`).then(() => {
-      console.log("id deleted");
-      setPersons(persons.filter((person) => person.id !== id))
-    })
+    axios
+      .delete(`http://localhost:5000/api/phonebooks/${id}`)
+      .then(() => {
+        console.log("id deleted");
+        setPersons(persons.filter((person) => person.id !== id));
+      })
+      .catch((err) => {
+        setNotifications(`User has already been added to the list.`);
+        setTimeout(() => setNotifications(""), 5000);
+      });
   };
-
 
   return (
     <div style={{ backgroundColor: "#333", color: "#eee", height: "100vh" }}>
@@ -65,6 +84,7 @@ const App = () => {
         newNumber={newNumber}
         setNewNumber={setNewNumber}
       />
+      <Notifications notifications={notifications} />
       <h2>Numbers</h2>
       <PersonData persons={persons} onClickDeleteData={onClickDeleteData} />
       typing {newName}
