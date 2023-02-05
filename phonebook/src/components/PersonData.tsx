@@ -1,7 +1,7 @@
 import React from 'react'
 
 function PersonData(props: any) {
-  console.log("AllPerson", props.persons)
+  // console.log("AllPerson", props.persons)
   return (
     <>
     {props.persons.map((person: any, idx: React.Key | null | undefined) => (

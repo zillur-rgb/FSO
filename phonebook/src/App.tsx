@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import PersonData from "./components/PersonData";
 import PersonForm from "./components/PersonForm";
-import { createNew, deleteData, getAll } from "../src/utils/axios";
+import { createNew, deleteData, getAll, update } from "../src/utils/axios";
 
 export type PhonebookType = {
   id: string;
@@ -14,14 +14,14 @@ const App = () => {
   const [persons, setPersons] = useState<PhonebookType>([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
-  console.log("Persons:", persons);
+  // console.log("Persons:", persons);
 
   useEffect(() => {
-    console.log("Start fetching");
+    // console.log("Start fetching");
     getAll().then((response) => {
       console.log("Fetching done");
       setPersons(persons.concat(response.data));
-      console.log("Persons: ", persons);
+      // console.log("Persons: ", persons);
     });
   }, []);
 
@@ -32,8 +32,13 @@ const App = () => {
       number: newNumber,
     };
     const alreadyAdded = persons.find((person) => person.name === addName.name);
+    
     alreadyAdded
-      ? alert(`${addName.name} is already added`)
+      ? axios.put(`http://localhost:5000/api/phonebooks/${alreadyAdded.id}`, addName).then(res => {
+        setPersons(persons.map(person => person.name !== addName.name ? person : res.data))
+        setNewName("");
+          setNewNumber("");
+      })
       : createNew(addName).then((response) => {
           console.log("Added: ", response.data);
           setPersons(persons.concat(response.data));
@@ -45,9 +50,10 @@ const App = () => {
   const onClickDeleteData = (id: string) => {
     axios.delete(`http://localhost:5000/api/phonebooks/${id}`).then(() => {
       console.log("id deleted");
-      persons.filter((person) => person.id !== id);
+      setPersons(persons.filter((person) => person.id !== id))
     })
   };
+
 
   return (
     <div style={{ backgroundColor: "#333", color: "#eee", height: "100vh" }}>
