@@ -38,7 +38,7 @@ app.get('/', (request, response) => {
 /**
  * Posting phonebook data to backend
  */
-app.post('/api/phonebooks', (req, res) => {
+app.post('/api/phonebooks', (req, res, next) => {
   const body = req.body;
 
   console.log('body', body);
@@ -197,13 +197,17 @@ const errorHandler = (error, req, res, next) => {
     return res.status(400).send('Malformatted id');
   }
 
+  if(error.message === "ValidationError"){
+    return res.status(400).json({error: error.message})
+  }
+
   next(error);
 };
 
 // This must be the last middleware
 app.use(errorHandler);
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
