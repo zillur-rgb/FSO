@@ -13,7 +13,7 @@ const getAll = () => axios.get(baseUrl)
  * @param newData 
  * @returns 
  */
-const createNew = (newData: {name: string, number: string}) => axios.post(baseUrl, newData)
+const createNew = (newData: {name: string, number: string}) => axios.post(baseUrl, newData).catch
 
 /**
  * 

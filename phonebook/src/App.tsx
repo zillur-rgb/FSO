@@ -21,7 +21,7 @@ const App = () => {
 
   useEffect(() => {
     // console.log("Start fetching");
-    getAll().then((response) => {
+    axios.get("http://localhost:8080/api/phonebooks").then((response) => {
       console.log("Fetching done");
       setPersons(persons.concat(response.data));
       // console.log("Persons: ", persons);
@@ -39,7 +39,7 @@ const App = () => {
     alreadyAdded
       ? axios
           .put(
-            `http://localhost:5000/api/phonebooks/${alreadyAdded.id}`,
+            `http://localhost:8080/api/phonebooks/${alreadyAdded.id}`,
             addName
           )
           .then((res) => {
@@ -51,19 +51,21 @@ const App = () => {
             setNewName("");
             setNewNumber("");
           })
-      : createNew(addName).then((response) => {
-          console.log("Added: ", response.data);
-          setPersons(persons.concat(response.data));
-          setNotifications(`${addName.name} has been added to the list.`);
-          setTimeout(() => setNotifications(""), 5000);
-          setNewName("");
-          setNewNumber("");
-        });
+      : axios
+          .post("http://localhost:8080/api/phonebooks", addName)
+          .then((response) => {
+            console.log("Added: ", response.data);
+            setPersons(persons.concat(response.data));
+            setNotifications(`${addName.name} has been added to the list.`);
+            setTimeout(() => setNotifications(""), 5000);
+            setNewName("");
+            setNewNumber("");
+          }).catch(error => setNotifications(error.message))
   };
 
   const onClickDeleteData = (id: string) => {
     axios
-      .delete(`http://localhost:5000/api/phonebooks/${id}`)
+      .delete(`http://localhost:8080/api/phonebooks/${id}`)
       .then(() => {
         console.log("id deleted");
         setPersons(persons.filter((person) => person.id !== id));
