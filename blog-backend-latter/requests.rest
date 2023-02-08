@@ -5,11 +5,13 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title" : "What actually is Murphy's law?",
-    "image":"https://images.unsplash.com/photo-1589994965851-a8f479c573a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+    "title" : "Why we use Mongoose js?",
+    "image":"https://images.unsplash.com/photo-1553028429-58f931c6b716?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
     "category": [
-        "Mathematics",
-        "Algebra"
+        "Computer Science",
+        "Database",
+        "Programming",
+        "Mongodb"
     ],
-    "desc" : "Murphy's law is an adage or epigram that is typically stated as: 'Anything that can go wrong will go wrong.' In some formulations, it is extended to 'Anything that can go wrong will go wrong, and at the worst possible time.''\n' '\n'The perceived perversity of the universe has long been a subject of comment, and precursors to the modern version of Murphy's law are abundant. Recent significant research in this area has been conducted by members of the American Dialect Society.'\n''\n'Mathematician Augustus De Morgan wrote on June 23, 1866:[1] The first experiment already illustrates a truth of the theory, well confirmed by practice, what-ever can happen will happen if we make trials enough.' In later publications 'whatever can happen will happen' occasionally is termed 'Murphy's law', which raises the possibility—if something went wrong—that 'Murphy' is 'De Morgan' misremembered (an option, among others, raised by Goranson on the American Dialect Society list).[2]"
+    "desc" : "Let's face it, writing MongoDB validation, casting and business logic boilerplate is a drag. That's why we wrote Mongoose.''\n' '\n'Now say we like fuzzy kittens and want to record every kitten we ever meet in MongoDB. The first thing we need to do is include mongoose in our project and open a connection to the test database on our locally running instance of MongoDB.'\n''\n'Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box."
 }

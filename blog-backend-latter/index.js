@@ -3,22 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-const mongoose = require("mongoose");
-mongoose.set("strictQuery", false);
-
-const blogSchema = new mongoose.Schema({
-  title: String,
-  image: String,
-  category: [String],
-  desc: String,
-  createdAt: Date,
-});
-
-const Blog = mongoose.model("Blog", blogSchema);
-
-const mongoUrl = process.env.MONGODB_URI;
-mongoose.connect(mongoUrl);
-mongoose.set("strictQuery", true);
+const Blog = require("./models/blog");
 
 app.use(cors());
 app.use(express.json());
@@ -36,7 +21,6 @@ app.post("/api/blogs", (request, response) => {
     image: body.image,
     category: body.category,
     desc: body.desc,
-    createdAt: new Date(),
   });
 
   blog.save().then((result) => {
