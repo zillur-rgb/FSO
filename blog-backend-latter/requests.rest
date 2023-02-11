@@ -21,7 +21,10 @@ POST http://localhost:5000/api/users
 Content-Type: application/json
 
 {
-    "username" : "mouri",
-    "name": "Mouri Begum",
+    "username" : "zillur",
+    "name": "Zillur Rahman",
     "password": "1234567890"
 }
+
+###
+DELETE  http://localhost:5000/api/users/62f76e5e9a45906d4acb6f28
