@@ -21,6 +21,11 @@ const cors = require("cors");
 const blogsRouter = require("./controllers/blogs");
 
 /**
+ * Importing usersRouter
+ */
+const usersRouter = require("./controllers/user");
+
+/**
  * importing our custom made middleware
  * where we added three middlewares
  */
@@ -55,6 +60,7 @@ app.use(express.json());
 app.use(middleware.requestLogger);
 
 app.use("/api/blogs", blogsRouter);
+app.use("/api/users", usersRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

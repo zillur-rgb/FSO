@@ -15,3 +15,13 @@ Content-Type: application/json
     ],
     "desc" : "Let's face it, writing MongoDB validation, casting and business logic boilerplate is a drag. That's why we wrote Mongoose.''\n' '\n'Now say we like fuzzy kittens and want to record every kitten we ever meet in MongoDB. The first thing we need to do is include mongoose in our project and open a connection to the test database on our locally running instance of MongoDB.'\n''\n'Mongoose provides a straight-forward, schema-based solution to model your application data. It includes built-in type casting, validation, query building, business logic hooks and more, out of the box."
 }
+
+###
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+    "username" : "mouri",
+    "name": "Mouri Begum",
+    "password": "1234567890"
+}
