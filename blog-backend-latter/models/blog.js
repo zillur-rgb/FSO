@@ -21,6 +21,10 @@ const blogSchema = new mongoose.Schema(
       min: 12,
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );
