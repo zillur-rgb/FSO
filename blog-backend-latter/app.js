@@ -26,6 +26,11 @@ const blogsRouter = require("./controllers/blogs");
 const usersRouter = require("./controllers/user");
 
 /**
+ * Importing loginRouter
+ */
+const loginRouter = require("./controllers/login");
+
+/**
  * importing our custom made middleware
  * where we added three middlewares
  */
@@ -61,6 +66,7 @@ app.use(middleware.requestLogger);
 
 app.use("/api/blogs", blogsRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/login", loginRouter);
 
 app.use(middleware.unknownEndpoint);
 app.use(middleware.errorHandler);

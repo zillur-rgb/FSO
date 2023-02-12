@@ -28,3 +28,12 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:5000/api/users/62f76e5e9a45906d4acb6f28
+
+###
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+    "username": "sama",
+    "password": "1234567890"
+}
