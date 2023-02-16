@@ -39,8 +39,20 @@ const errorHandler = (error, req, res, next) => {
   next(error);
 };
 
+const tokenExtractor = (error, req, res, next) => {
+  const authorization = req.get("authorization");
+  if (authorization && authorization.startswith("Bearer ")) {
+    return authorization.replace("Bearer ", "");
+  }
+
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
+
+  next();
+};
+
 module.exports = {
   requestLogger,
   unknownEndpoint,
   errorHandler,
+  tokenExtractor,
 };

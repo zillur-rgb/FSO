@@ -10,6 +10,11 @@ const express = require("express");
  * calling the actual express function
  */
 const app = express();
+
+/**
+ * This middleware will extract the token
+ */
+app.use(middleware.tokenExtractor);
 /**
  * Addinf cors policy to run frontend withoutany issues
  */
