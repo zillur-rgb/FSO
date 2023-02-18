@@ -8,7 +8,14 @@ function App() {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
   const [user, setUser] = useState<any>();
 
-  console.log("user: ", user);
+  useEffect(() => {
+    const loggedUser = window.localStorage.getItem("user");
+
+    if (loggedUser) {
+      const user = JSON.parse(loggedUser);
+      setUser(user);
+    }
+  }, []);
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -19,6 +26,14 @@ function App() {
       {user && (
         <>
           <h2>Hey {user.name}, welcome to our app!</h2>
+          <button
+            onClick={() => {
+              window.localStorage.removeItem("user");
+              setUser(null);
+            }}
+          >
+            Logout
+          </button>
           <h2>Blogs</h2>
           {blogs.map((blog) => (
             <Blog title={blog.title} desc={blog.desc} />
