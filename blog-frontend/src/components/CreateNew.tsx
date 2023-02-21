@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import blogService from "../services/blogs";
 
-const CreateNew = ({ setBlogs, blogs }: any) => {
+const CreateNew = ({ setBlogs, blogs, setAlert }: any) => {
   const formRef = useRef<HTMLFormElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const imageRef = useRef<HTMLInputElement>(null);
@@ -20,9 +20,23 @@ const CreateNew = ({ setBlogs, blogs }: any) => {
 
       const blog = await blogService.createNewBlog(newBlog);
       await setBlogs(blogs.concat(blog));
+      setAlert({
+        type: "success",
+        desc: "Blog succesfully added.",
+      });
+      setTimeout(() => {
+        setAlert();
+      }, 5000);
       formRef.current?.reset();
     } catch (error) {
       console.log("Error: ", error);
+      setAlert({
+        type: "error",
+        desc: error,
+      });
+      setTimeout(() => {
+        setAlert();
+      }, 5000);
     }
   };
   return (

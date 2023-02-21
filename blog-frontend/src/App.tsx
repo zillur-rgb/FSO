@@ -4,12 +4,12 @@ import blogService from "../src/services/blogs";
 import Blog, { BlogType } from "./components/Blog";
 import CreateNew from "./components/CreateNew";
 import LoginForm from "./components/LoginForm";
+import Notifications, { NotificationsType } from "./components/Notifications";
 
 function App() {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
   const [user, setUser] = useState<any>();
-
-  console.log("User", user?.token);
+  const [alert, setAlert] = useState<NotificationsType | undefined>();
 
   useEffect(() => {
     blogService.getAll().then((blogs) => setBlogs(blogs));
@@ -37,7 +37,8 @@ function App() {
           >
             Logout
           </button>
-          <CreateNew blogs={blogs} setBlogs={setBlogs} />
+          {alert && <Notifications type={alert.type} desc={alert?.desc} />}
+          <CreateNew blogs={blogs} setBlogs={setBlogs} setAlert={setAlert} />
           <h2>Blogs</h2>
           {blogs?.map((blog) => (
             <Blog key={blog.desc} title={blog.title} desc={blog.desc} />
