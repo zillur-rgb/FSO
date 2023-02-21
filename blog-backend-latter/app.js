@@ -14,7 +14,7 @@ const app = express();
 /**
  * This middleware will extract the token
  */
-app.use(middleware.tokenExtractor);
+// app.use(middleware.tokenExtractor);
 /**
  * Addinf cors policy to run frontend withoutany issues
  */

@@ -20,16 +20,17 @@ blogsRouter.get("/", (request, response, next) => {
  * This helper function isolates token from
  * the authorization header
  */
-// const getTokenFrom = (req) => {
-//   const authorization = req.get("authorization");
-//   if (authorization && authorization.startsWith("Bearer ")) {
-//     return authorization.replace("Bearer ", "");
-//   }
-//   return null;
-// };
+const getTokenFrom = (req) => {
+  const authorization = req.get("authorization");
+  if (authorization && authorization.startsWith("Bearer ")) {
+    return authorization.replace("Bearer ", "");
+  }
+  return null;
+};
 
 blogsRouter.post("/", (request, response, next) => {
   const body = request.body;
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET);
 
   if (!decodedToken.id) {
     return response.status(401).json({
