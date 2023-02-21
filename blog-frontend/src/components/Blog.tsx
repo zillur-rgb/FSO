@@ -4,7 +4,7 @@ export interface BlogType {
 }
 
 const Blog = ({ title, desc }: BlogType) => (
-  <div>
+  <div key={desc}>
     {title} {desc}
   </div>
 );

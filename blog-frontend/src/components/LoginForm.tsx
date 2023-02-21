@@ -20,7 +20,7 @@ const LoginForm = ({ user, setUser }: any) => {
       };
       const user = await loginService.login(data);
       await setUser(user);
-      window.localStorage.setItem("user", JSON.stringify(user));
+      window.localStorage.setItem("loggedBlogAppUser", JSON.stringify(user));
       formRef.current?.reset();
     } catch (error) {
       console.log(error);
