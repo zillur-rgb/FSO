@@ -9,6 +9,7 @@ export interface CredentialsType {
 const LoginForm = ({ user, setUser }: any) => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handler = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -19,14 +20,16 @@ const LoginForm = ({ user, setUser }: any) => {
       };
       const user = await loginService.login(data);
       await setUser(user);
-      window.localStorage.setItem("user", JSON.stringify(user))
+      window.localStorage.setItem("user", JSON.stringify(user));
+      formRef.current?.reset();
     } catch (error) {
       console.log(error);
     }
   };
   return (
     <>
-      <form onSubmit={handler}>
+      <h3>Login here</h3>
+      <form ref={formRef} onSubmit={handler}>
         <input
           ref={usernameRef}
           name="username"
@@ -41,6 +44,7 @@ const LoginForm = ({ user, setUser }: any) => {
         />
         <button>Login</button>
       </form>
+      <h1>You have to login to see all the blogs and create blog</h1>
     </>
   );
 };

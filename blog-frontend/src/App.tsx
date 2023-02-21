@@ -22,7 +22,7 @@ function App() {
   }, []);
   return (
     <>
-      <LoginForm setUser={setUser} user={user} />
+      {!user && <LoginForm setUser={setUser} user={user} />}
       {user && (
         <>
           <h2>Hey {user.name}, welcome to our app!</h2>
