@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import blogService from "../services/blogs";
-
 const CreateNew = ({ setBlogs, blogs, setAlert }: any) => {
   const formRef = useRef<HTMLFormElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
@@ -41,7 +40,6 @@ const CreateNew = ({ setBlogs, blogs, setAlert }: any) => {
   };
   return (
     <>
-      <h3>Create new blog!</h3>
       <form ref={formRef} onSubmit={handler}>
         <input
           ref={titleRef}

@@ -5,6 +5,7 @@ import Blog, { BlogType } from "./components/Blog";
 import CreateNew from "./components/CreateNew";
 import LoginForm from "./components/LoginForm";
 import Notifications, { NotificationsType } from "./components/Notifications";
+import Togglable from "./components/Togglable";
 
 function App() {
   const [blogs, setBlogs] = useState<BlogType[]>([]);
@@ -38,7 +39,9 @@ function App() {
             Logout
           </button>
           {alert && <Notifications type={alert.type} desc={alert?.desc} />}
-          <CreateNew blogs={blogs} setBlogs={setBlogs} setAlert={setAlert} />
+          <Togglable btnLabel="Write a Blog">
+            <CreateNew blogs={blogs} setBlogs={setBlogs} setAlert={setAlert} />
+          </Togglable>
           <h2>Blogs</h2>
           {blogs?.map((blog) => (
             <Blog key={blog.desc} title={blog.title} desc={blog.desc} />
