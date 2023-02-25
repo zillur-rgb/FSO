@@ -12,7 +12,6 @@ export interface BlogType {
 
 const Blog = ({ title, desc, likes, id, blogs, setBlogs }: BlogType) => {
   const [viewDesc, setViewDesc] = useState<boolean>(false);
-  const [like, setLikes] = useState<number>(likes);
 
   const blogStyle: {
     paddingTop: number;

@@ -13,7 +13,11 @@ function App() {
   const [alert, setAlert] = useState<NotificationsType | undefined>();
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
+    blogService
+      .getAll()
+      .then((blogs) =>
+        setBlogs(blogs.sort((a: any, b: any) => b.likes - a.likes))
+      );
   }, []);
 
   console.log("Blogs,", blogs);
