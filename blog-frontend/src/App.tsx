@@ -16,6 +16,8 @@ function App() {
     blogService.getAll().then((blogs) => setBlogs(blogs));
   }, []);
 
+  console.log("Blogs,", blogs);
+
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedBlogAppUser");
     if (loggedUserJSON) {
@@ -44,7 +46,15 @@ function App() {
           </Togglable>
           <h2>Blogs</h2>
           {blogs?.map((blog) => (
-            <Blog key={blog.desc} title={blog.title} desc={blog.desc} />
+            <Blog
+              key={blog.desc}
+              title={blog.title}
+              desc={blog.desc}
+              likes={blog.likes}
+              id={blog.id}
+              setBlogs={setBlogs}
+              blogs={blogs}
+            />
           ))}
         </>
       )}

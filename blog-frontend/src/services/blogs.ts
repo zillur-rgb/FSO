@@ -19,10 +19,22 @@ const createNewBlog = async (newObject: any) => {
     },
   };
 
-  console.log("Token", token);
-
   const response = await axios.post(baseUrl, newObject, config);
   return response.data;
 };
+
+const updateBlog = async (id: string, updatedBlog: any) => {
+  const config = {
+    headers: {
+      Authorization: token,
+    },
+  };
+  const response = await axios.put(
+    `http://localhost:5000/api/blogs/${id}`,
+    updatedBlog,
+    config
+  );
+  return response.data;
+};
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, setToken, createNewBlog };
+export default { getAll, setToken, createNewBlog, updateBlog };
