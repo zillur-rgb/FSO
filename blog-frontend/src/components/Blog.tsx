@@ -1,5 +1,5 @@
 import { useState } from "react";
-import updateService from "../services/blogs";
+import blogService from "../services/blogs";
 
 export interface BlogType {
   title: string;
@@ -32,7 +32,7 @@ const Blog = ({ title, desc, likes, id, blogs, setBlogs }: BlogType) => {
       likes: likes + 1,
     };
 
-    await updateService.updateBlog(id, updatedLike);
+    await blogService.updateBlog(id, updatedLike);
 
     setBlogs(
       blogs.map((blog: any) =>
@@ -46,6 +46,13 @@ const Blog = ({ title, desc, likes, id, blogs, setBlogs }: BlogType) => {
     );
   };
 
+  const deleteBlog = async (id: string) => {
+    if (window.confirm("Do you really want to delete the blog?")) {
+      await blogService.deleteBlog(id);
+      setBlogs(blogs.filter((blog: any) => blog.id !== id));
+    }
+  };
+
   return (
     <div key={desc} style={blogStyle}>
       <h3>{title}</h3>
@@ -56,6 +63,13 @@ const Blog = ({ title, desc, likes, id, blogs, setBlogs }: BlogType) => {
         <>
           <p>{desc}</p>
           <button onClick={() => increaseLike(id)}>like</button> {likes}
+          <br></br>
+          <button
+            onClick={() => deleteBlog(id)}
+            style={{ backgroundColor: "lightBlue" }}
+          >
+            remove
+          </button>
         </>
       )}
     </div>

@@ -36,5 +36,10 @@ const updateBlog = async (id: string, updatedBlog: any) => {
   );
   return response.data;
 };
+
+const deleteBlog = async (id: string) => {
+  const response = await axios.delete(`http://localhost:5000/api/blogs/${id}`);
+  return response;
+};
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { getAll, setToken, createNewBlog, updateBlog };
+export default { getAll, setToken, createNewBlog, updateBlog, deleteBlog };

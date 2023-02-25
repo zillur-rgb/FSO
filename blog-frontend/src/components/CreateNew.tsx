@@ -65,7 +65,7 @@ const CreateNew = ({ setBlogs, blogs, setAlert }: any) => {
           type={"text"}
           placeholder="Write your description here."
         />
-        <button>Login</button>
+        <button>Create new blog</button>
       </form>
     </>
   );
