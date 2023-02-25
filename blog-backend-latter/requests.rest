@@ -1,20 +1,32 @@
 GET http://localhost:5000/api/blogs
 
 ###
+
+GET http://localhost:5000/api/users/63e81150cbe411df4d3595db
+
+###
 POST http://localhost:5000/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNhbWEiLCJpZCI6IjYzZTgxMTUwY2JlNDExZGY0ZDM1OTVkYiIsImlhdCI6MTY3NjE5NjI2Mn0.WGCFrTKlypFMRYM1GaTTcqHMOOBEgfOiPGwLMVrPMZI
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vZHBsdXMiLCJpZCI6IjYzZmExOGE4NGRmMmI4NWIxNDYwOThhNSIsImlhdCI6MTY3NzMzNDc0Nn0.ci7mJQqYXWZRF9S0bAPPpK_ppwuYF5VtOKHq971DvCo
 
 {
-    "title" : "HTTP authentication.",
+    "title" : "Populating Multiple Paths",
     "image":"https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication/http-auth-sequence-diagram.png",
     "category": [
         "Computer Science",
         "Database",
-        "Programming",
-        "HTTP"
+        "mongoose"
     ],
-    "desc" : "Redux is a predictable state container for JavaScript apps.  It helps you write applications that behave consistently, run in different environments (client, server, and native), and are easy to test. On top of that, it provides a great developer experience, such as live code editing combined with a time traveling debugger.  You can use Redux together with React, or with any other view library. It is tiny (2kB, including dependencies), but has a large ecosystem of addons available."
+    "desc" : "What if we only want a few specific fields returned for the populated documents? This can be accomplished by passing the usual field name syntax as the second argument to the populate method:"
+}
+
+###
+PUT http://localhost:5000/api/blogs/63da0a3a9d91f6fa5ec1f8d2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vZHBsdXMiLCJpZCI6IjYzZmExOGE4NGRmMmI4NWIxNDYwOThhNSIsImlhdCI6MTY3NzMzNDc0Nn0.ci7mJQqYXWZRF9S0bAPPpK_ppwuYF5VtOKHq971DvCo
+
+{
+    "likes": 0
 }
 
 ###
@@ -22,8 +34,8 @@ POST http://localhost:5000/api/users
 Content-Type: application/json
 
 {
-    "username" : "zillur",
-    "name": "Zillur Rahman",
+    "username" : "Cocacola",
+    "name": "Cocacola GmbH",
     "password": "1234567890"
 }
 
@@ -35,6 +47,6 @@ POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-    "username": "sama",
+    "username": "modplus",
     "password": "1234567890"
 }

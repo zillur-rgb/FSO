@@ -31,13 +31,18 @@ usersRouter.post("/", async (req, res, next) => {
   }
 });
 usersRouter.get("/", async (req, res) => {
-  const users = await User.find({}).populate("blogs", {
-    itle: 1,
-    imagename: 1,
-    category: 1,
-    desc: 1,
-  });
+  const users = await User.find({}).populate("blogs");
   res.json(users);
+});
+
+usersRouter.get("/:id", async (request, response) => {
+  const user = await User.findById(request.params.id);
+  console.log("user", user);
+  if (user) {
+    response.json(user);
+  } else {
+    response.status(404).end();
+  }
 });
 
 usersRouter.delete("/:id", async (req, res, next) => {
