@@ -5,28 +5,34 @@ GET http://localhost:5000/api/blogs
 GET http://localhost:5000/api/users/63e81150cbe411df4d3595db
 
 ###
+DELETE http://localhost:5000/api/blogs/63da0dfcc48446cfa1c69bee
+
+###
+DELETE http://localhost:5000/api/users/63fa29cec06d20eea7401b6f
+
+###
 POST http://localhost:5000/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vZHBsdXMiLCJpZCI6IjYzZmExOGE4NGRmMmI4NWIxNDYwOThhNSIsImlhdCI6MTY3NzMzNDc0Nn0.ci7mJQqYXWZRF9S0bAPPpK_ppwuYF5VtOKHq971DvCo
+Authorization: NA
 
 {
-    "title" : "Populating Multiple Paths",
-    "image":"https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication/http-auth-sequence-diagram.png",
-    "category": [
-        "Computer Science",
-        "Database",
-        "mongoose"
-    ],
-    "desc" : "What if we only want a few specific fields returned for the populated documents? This can be accomplished by passing the usual field name syntax as the second argument to the populate method:"
+    "title" : "Why one should learn algorithm and data structures?",
+    "image":"https://images.unsplash.com/photo-1515879218367-8466d910aaa4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80",
+    "category":[
+"Technology",
+"Programming",
+"Computer Science"
+],
+    "desc" : "Data Structures and Algorithms are like backbone of a well designed and efficient code. For a software developer, Data Structures and Algorithms are the most important assets for programming, but Algorithms are not only limited to software engineering but in any field, Algorithms are a great way to define instructions to achieve some specific task. As a software development student, I’ve always tried to learn Data Structures and Algorithms, and I know basics and some intermediate level stuff, but I’ve always wanted to learn more about it and I tried so many times but I lacked consistency. But in this quarantine period, I had all the time and decided to start learning Data Structures And Algorithms. \n Well as we all know, Data Structures and Algorithms are very important to crack coding interviews but that isn’t the only thing where learning Data Structures and Algorithms are useful. Data Structures and Algorithms Knowledge give us the ability to improve our solution to the problem and the ability to write much better and efficient code. \n But most importantly, it helps to build problem solving mindset. And programming is almost all about problem solving. We can adapt any programming language syntax but the problem solving skill can’t be adapted overnight. Thus, learning Data Structures and Algorithms can be a major learning curve for any computer science student."
 }
 
 ###
-PUT http://localhost:5000/api/blogs/63da0a3a9d91f6fa5ec1f8d2
+PUT http://localhost:5000/api/blogs/63da0dbac48446cfa1c69bec
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1vZHBsdXMiLCJpZCI6IjYzZmExOGE4NGRmMmI4NWIxNDYwOThhNSIsImlhdCI6MTY3NzMzNDc0Nn0.ci7mJQqYXWZRF9S0bAPPpK_ppwuYF5VtOKHq971DvCo
+Authorization: NA
 
 {
-    "likes": 0
+    "user": "63e8116ecbe411df4d3595df"
 }
 
 ###
@@ -34,8 +40,8 @@ POST http://localhost:5000/api/users
 Content-Type: application/json
 
 {
-    "username" : "Cocacola",
-    "name": "Cocacola GmbH",
+    "username" : "Chakabba",
+    "name": "Chakabba Ahmed",
     "password": "1234567890"
 }
 
@@ -47,6 +53,6 @@ POST http://localhost:5000/api/login
 Content-Type: application/json
 
 {
-    "username": "modplus",
+    "username": "mouri",
     "password": "1234567890"
 }

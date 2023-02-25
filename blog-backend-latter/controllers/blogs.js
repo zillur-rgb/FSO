@@ -77,12 +77,16 @@ blogsRouter.put("/:id", (req, res, next) => {
 
 blogsRouter.get("/:id", async (request, response) => {
   const blog = await Blog.findById(request.params.id);
-  console.log("Blog", blog);
   if (blog) {
     response.json(blog);
   } else {
     response.status(404).end();
   }
+});
+
+blogsRouter.delete("/:id", async (req, res, next) => {
+  await Blog.findByIdAndRemove(req.params.id);
+  res.status(204).end();
 });
 
 module.exports = blogsRouter;
