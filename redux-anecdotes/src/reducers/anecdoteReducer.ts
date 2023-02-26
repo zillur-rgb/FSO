@@ -34,6 +34,16 @@ const reducer = (state: any = initialState, action: any) => {
       };
 
       return state.map((s: { id: any }) => (s.id !== id ? s : increaseVote));
+
+    case "ADD_NEW":
+      return [
+        ...state,
+        {
+          id: action.payload.id,
+          content: action.payload.content,
+          votes: action.payload.vote,
+        },
+      ];
     default:
       return state;
   }

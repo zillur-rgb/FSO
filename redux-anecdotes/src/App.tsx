@@ -7,6 +7,7 @@ import {
 } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { increaseVote } from "./actions/increaseVote";
+import AddNewForm from "./components/AddNewForm";
 
 function App() {
   const anecdotes: any = useSelector((state) => state);
@@ -50,12 +51,7 @@ function App() {
         )
       )}
       <h2>create new</h2>
-      <form>
-        <div>
-          <input />
-        </div>
-        <button>create</button>
-      </form>
+      <AddNewForm />
     </div>
   );
 }
