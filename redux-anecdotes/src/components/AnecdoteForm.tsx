@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { addNew } from "../actions/increaseVote";
 
-const AddNewForm = () => {
+const AnecdoteForm = () => {
   const dispatch = useDispatch();
 
   const addNewAnecdote = (event: any) => {
@@ -21,4 +21,4 @@ const AddNewForm = () => {
   );
 };
 
-export default AddNewForm;
+export default AnecdoteForm;

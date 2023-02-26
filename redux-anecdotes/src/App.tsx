@@ -5,18 +5,14 @@ import {
   ReactFragment,
   ReactPortal,
 } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { increaseVote } from "./actions/increaseVote";
-import AddNewForm from "./components/AddNewForm";
+import { useSelector } from "react-redux";
+import AddNewForm from "./components/AnecdoteForm";
+import SingleAnecdote from "./components/SingleAnecdote";
 
 function App() {
   const anecdotes: any = useSelector((state) => state);
   const sortedAnecdotes = anecdotes.sort((a: any, b: any) => b.votes - a.votes);
-  const dispatch = useDispatch();
 
-  const vote = (id: any) => {
-    dispatch(increaseVote(id));
-  };
   return (
     <div>
       <h2>Anecdotes</h2>
@@ -43,11 +39,7 @@ function App() {
             | undefined;
         }) => (
           <div key={anecdote.id}>
-            <div>{anecdote.content}</div>
-            <div>
-              has {anecdote.votes}
-              <button onClick={() => vote(anecdote.id)}>vote</button>
-            </div>
+            <SingleAnecdote anecdote={anecdote} />
           </div>
         )
       )}
