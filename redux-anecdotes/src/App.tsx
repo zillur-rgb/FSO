@@ -11,6 +11,7 @@ import AddNewForm from "./components/AddNewForm";
 
 function App() {
   const anecdotes: any = useSelector((state) => state);
+  const sortedAnecdotes = anecdotes.sort((a: any, b: any) => b.votes - a.votes);
   const dispatch = useDispatch();
 
   const vote = (id: any) => {
@@ -19,7 +20,7 @@ function App() {
   return (
     <div>
       <h2>Anecdotes</h2>
-      {anecdotes.map(
+      {sortedAnecdotes.map(
         (anecdote: {
           id: Key | null | undefined;
           content:
