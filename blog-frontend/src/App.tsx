@@ -20,8 +20,6 @@ function App() {
       );
   }, []);
 
-  console.log("Blogs,", blogs);
-
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedBlogAppUser");
     if (loggedUserJSON) {
@@ -29,7 +27,7 @@ function App() {
       setUser(user);
       blogService.setToken(userData?.token);
     }
-  }, []);
+  }, [user]);
   return (
     <>
       {!user && <LoginForm setUser={setUser} user={user} />}
