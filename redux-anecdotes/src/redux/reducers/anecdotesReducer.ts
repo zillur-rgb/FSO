@@ -23,15 +23,23 @@ const initialState = anecdotesAtStart.map(asObject);
 
 const anecdoteSlice = createSlice({
   name: "anecdotes",
-  initialState: initialState,
+  initialState,
   reducers: {
     createAnecdote(state, action) {
+      console.log("state", state);
       const newAnecdote = {
         id: action.payload.id,
         content: action.payload.content,
         votes: action.payload.vote,
       };
       state.push(newAnecdote);
+    },
+    increaseVote(state, action) {
+      const id = action.payload.id;
+      const exactAnecdote = state.find((s) => s.id === id);
+      state.map((s) =>
+        s.id !== exactAnecdote?.id ? s : (s.votes = s.votes + 1)
+      );
     },
   },
 });
