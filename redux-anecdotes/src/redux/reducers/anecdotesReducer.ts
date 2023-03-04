@@ -19,21 +19,18 @@ import { createSlice } from "@reduxjs/toolkit";
 //   };
 // };
 
-// const initialState = anecdotesAtStart.map(asObject);
+type InitisalTypes = any[];
+
+const initialState: InitisalTypes = [];
 
 const anecdoteSlice = createSlice({
   name: "anecdotes",
-  initialState: [],
+  initialState,
   reducers: {
-    createAnecdote(state, action) {
-      // console.log("state now", JSON.parse(JSON.stringify(state)));
-      // const newAnecdote = {
-      //   id: getId(),
-      //   content: action.payload,
-      //   votes: 0,
-      // };
-      // state.push(newAnecdote);
-      // console.log("state then", JSON.parse(JSON.stringify(state)));
+    createDote(state, action) {
+      console.log("state now", JSON.parse(JSON.stringify(state)));
+      state.push(action.payload);
+      console.log("state then", JSON.parse(JSON.stringify(state)));
     },
     increaseVote(state, action) {
       // const id = action.payload;
@@ -55,5 +52,5 @@ const anecdoteSlice = createSlice({
   },
 });
 
-export const { createAnecdote, increaseVote, setDotes } = anecdoteSlice.actions;
+export const { createDote, increaseVote, setDotes } = anecdoteSlice.actions;
 export default anecdoteSlice.reducer;
