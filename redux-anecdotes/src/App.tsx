@@ -1,15 +1,20 @@
-import { Key } from "react";
-import { useSelector } from "react-redux";
+import { Key, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AddNewForm from "./components/AnecdoteForm";
 import Notification from "./components/Notification";
 import SingleAnecdote from "./components/SingleAnecdote";
+import { setDotes } from "./redux/reducers/anecdotesReducer";
 import { RootState } from "./redux/store";
+import anecdotesServices from "./services/anecdotes";
 
 function App() {
   const anecdotes = useSelector((state: RootState) => state.anecdotes);
   const noti = useSelector((state: RootState) => state.noti);
+  const dispatch = useDispatch();
 
-  console.log("Noti", noti);
+  useEffect(() => {
+    anecdotesServices.getAll().then((dotes) => dispatch(setDotes(dotes)));
+  }, [dispatch]);
 
   return (
     <div>
