@@ -6,8 +6,6 @@ import { RootState } from "./redux/store";
 
 function App() {
   const anecdotes = useSelector((state: RootState) => state.anecdotes);
-  // const sortedAnecdotes = anecdotes.sort((a: any, b: any) => b.votes - a.votes);
-  // console.log("sortedAnecdotes", sortedAnecdotes);
 
   return (
     <div>
