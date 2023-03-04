@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import { increaseVote } from "../redux/reducers/anecdotesReducer";
+import { showHideNoti } from "../redux/reducers/notificationReducer";
 
 const SingleAnecdote = (anecdote: any) => {
   const dispatch = useDispatch();
@@ -7,6 +8,11 @@ const SingleAnecdote = (anecdote: any) => {
 
   const vote = (id: any) => {
     dispatch(increaseVote(id));
+    dispatch(showHideNoti());
+
+    setTimeout(() => {
+      dispatch(showHideNoti());
+    }, 3000);
   };
   return (
     <>
